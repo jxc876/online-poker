@@ -4,5 +4,6 @@
 
 # Development 
 
-* Development: Run `ng serve` & navigate to `http://localhost:4200/`
-* Build: Run `ng build`, the results will be in the  `dist` directory (use `--prod` for prod builds)
+* Local Dev: Run `ng serve` & navigate to `http://localhost:4200/`
+* Test Before Deploying: `npm run firebase-local`
+* Deploy with Firebase: `npm run deploy`
