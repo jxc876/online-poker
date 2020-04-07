@@ -104,10 +104,10 @@
   position:relative;
   background-color:white;
   font-family:"Houschka Rounded";
-  &.figures-P, &.figures-C{
+  &.figures-SPADES, &.figures-CLUBS{
     color:#515260;
   }
-  &.figures-H, &.figures-D{
+  &.figures-HEARTS, &.figures-DIAMONDS{
     color:#EC6E69;
   }
   h1{
@@ -138,20 +138,16 @@
   height:20px;
   background-image:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/441095/clovers.svg');
   background-size:40px;
-  // Spaces
-  &.P{
+  &.SPADES{
     background-position:0 0;
   }
-  // Diamonds
-  &.D{
+  &.DIAMONDS{
     background-position:20px 0;
   }
-  // Clubs
-  &.C{
+  &.CLUBS{
     background-position:20px 20px;
   }
-  // Hearts
-  &.H{
+  &.HEARTS{
     background-position:0 20px;
   }
 }
