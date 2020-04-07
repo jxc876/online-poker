@@ -1,0 +1,6 @@
+<div class="poker-chip-container">
+  <div class="poker-chip {{color}}" [ngClass]="{ 'disabled': disabled }">
+    <div>{{this.value}}</div>
+  </div>
+  <div *ngIf="showQuantity" class="quantity">x 0</div>
+</div>
