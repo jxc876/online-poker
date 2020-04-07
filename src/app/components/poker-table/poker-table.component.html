@@ -1,27 +1,41 @@
+<div class="loading-container">
+  <mat-progress-bar *ngIf="isLoading"  mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1>Actions</h1>
+<button mat-flat-button (click)="drawCards()">Draw Cards</button>
+<button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
+<button mat-flat-button (click)="burnCard()">Burn Card</button>
+<button mat-flat-button (click)="shuffle()">Reset</button>
+
+<div *ngIf="deck">
+  <h1>Deck Information</h1>
+  <ul>
+    <li>Deck ID: {{deckId}}</li>
+    <li>Cards Remaining: <strong>{{deck.remaining}}</strong></li>
+    <li>Burned Cards: {{burnedCards}}</li>
+  </ul>
+</div>
+
+<div *ngIf="privateCards">
+
+  <h1>Your Cards</h1>
+
+  <div class="private-card-container">
+    <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
+  </div>
+</div>
+
 <div class="table-container">
 
   <div class="table">
 
     <div class="card-place">
 
-      <div class="card figures-HEARTS values-1">
-        <h1>1</h1><div class="figures HEARTS"></div><h1>1</h1>
-      </div>
-
-      <div class="card figures-DIAMONDS values-7">
-        <h1>7</h1><div class="figures DIAMONDS"></div><h1>7</h1>
-      </div>
-
-      <div class="card figures-CLUBS values-2">
-        <h1>2</h1><div class="figures CLUBS"></div><h1>2</h1>
-      </div>
-
-      <div class="card figures-DIAMONDS values-4">
-        <h1>4</h1><div class="figures DIAMONDS"></div><h1>4</h1>
-      </div>
-
-      <div class="card figures-SPADES values-2">
-        <h1>2</h1><div class="figures SPADES"></div><h1>2</h1>
+      <div *ngFor="let card of communityCards" class="card figures-{{card.suit}}">
+        <h1>{{card.value}}</h1>
+        <div class="figures {{card.suit}}"></div>
+        <h1>{{card.value}}</h1>
       </div>
 
     </div>
@@ -233,6 +247,13 @@
 
     </div>
   </div>
+</div>
+
+<div class="history-container">
+  <h1>History</h1>
+  <ul>
+    <li *ngFor="let history of historyLog">{{history}}</li>
+  </ul>
 </div>
 
 <p>

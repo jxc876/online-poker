@@ -357,3 +357,46 @@
   outline:none;
   padding:5px 10px;
 }
+
+
+
+
+button {
+  margin: 5px;
+}
+
+.card-container img {
+  margin: 0 10px;
+}
+
+.burned-cards-container {
+  display: flex;
+  align-items: center;
+}
+
+.burn-count {
+  font-size: 40px;
+}
+
+.card-back {
+  width: 226px;
+  height: 314px;
+}
+
+.loading-container {
+  margin-top: 10px;
+  min-height: 10px;
+}
+
+.card-img {
+  padding: 10px;
+  width: 120px;
+  //height: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .card {
+    width: 100px;
+    height: 140px;
+  }
+}
