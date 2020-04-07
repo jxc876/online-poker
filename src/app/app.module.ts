@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {DeckModule} from './components/deck/deck.module';
+import {ChipModule} from './components/chips/chip.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {DeckModule} from './components/deck/deck.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DeckModule
+    DeckModule,
+    ChipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
