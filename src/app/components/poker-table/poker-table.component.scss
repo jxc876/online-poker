@@ -19,7 +19,8 @@
     font-size:18px;
     color:#96e296;
     &:before{
-      content:"$ ";
+      content:"$";
+      padding-right: 3px;
     }
   }
   .v-10{
@@ -54,7 +55,7 @@
     font-size:18px;
     color:#96e296;
     &:before{
-      content:"$ ";
+      content:"$";
     }
   }
   [class^="token-"]{
@@ -247,6 +248,7 @@
       font-size:18px;
       overflow:hidden;
       position:relative;
+      font-weight: 900;
     }
 
     &.playing:before{
