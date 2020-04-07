@@ -138,15 +138,19 @@
   height:20px;
   background-image:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/441095/clovers.svg');
   background-size:40px;
+  // Spaces
   &.P{
     background-position:0 0;
   }
+  // Diamonds
   &.D{
     background-position:20px 0;
   }
+  // Clubs
   &.C{
     background-position:20px 20px;
   }
+  // Hearts
   &.H{
     background-position:0 20px;
   }
