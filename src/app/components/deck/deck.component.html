@@ -1,0 +1,53 @@
+<div class="card-wrapper">
+
+  <div class="loading-container">
+    <mat-progress-bar *ngIf="isLoading"  mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <h1>Actions</h1>
+  <button mat-flat-button (click)="drawCards()">Draw Cards</button>
+  <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
+  <button mat-flat-button (click)="burnCard()">Burn Card</button>
+  <button mat-flat-button (click)="shuffle()">Reset</button>
+
+  <div *ngIf="deck">
+    <h1>Current Deck</h1>
+    <ul>
+      <li>Deck ID: {{deckId}}</li>
+      <li>Cards Remaining: <strong>{{deck.remaining}}</strong></li>
+      <li>Burned Cards: {{burnedCards}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="communityCards?.length > 0 || burnedCards > 0" class="community-card-container">
+
+    <h1>Community Cards</h1>
+
+    <div class="visible-cards">
+      <img class="card" *ngFor="let card of communityCards" src="{{card.image}}" alt="Public Card">
+    </div>
+
+    <div class="burned-cards-container">
+      <img class="card card-back" src="assets/images/cardBackRed.jpg" alt="Burned Card">
+      <span class="burn-count">x {{burnedCards}}</span>
+    </div>
+  </div>
+
+  <div *ngIf="handCards">
+
+    <h1>Your Cards</h1>
+
+    <div class="card-container">
+      <img src="{{handCards.cards[0].image}}" alt="Card One">
+      <img src="{{handCards.cards[1].image}}" alt="Card Two">
+    </div>
+  </div>
+
+  <div class="history-container">
+    <h1>History</h1>
+    <ul>
+      <li *ngFor="let history of historyLog">{{history}}</li>
+    </ul>
+  </div>
+
+</div>
