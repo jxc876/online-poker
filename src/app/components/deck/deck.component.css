@@ -3,7 +3,7 @@
 }
 
 button {
-  margin-right: 8px;
+  margin: 5px;
 }
 
 .card-container img {
@@ -31,4 +31,12 @@ button {
 
 .card {
   padding: 10px;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .card {
+    width: 100px;
+    height: 140px;
+  }
 }

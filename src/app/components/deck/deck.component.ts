@@ -10,7 +10,7 @@ export class DeckComponent implements OnInit {
 
   deckId: string;
   deck: DeckResponse;
-  handCards: CardDrawResponse;
+  privateCards: CardDrawResponse;
   communityCards: Card[] = [];
   burnedCards: number;
   isLoading: boolean;
@@ -37,7 +37,7 @@ export class DeckComponent implements OnInit {
     this.historyLog.push(`Draw Cards: ${count}`);
     this.cardApi.drawCards(this.deckId, count).subscribe((drawCardResponse => {
       this.isLoading = false;
-      this.handCards = drawCardResponse;
+      this.privateCards = drawCardResponse;
       this.refreshDeckInfo();
     }));
   }
@@ -82,7 +82,7 @@ export class DeckComponent implements OnInit {
     this.historyLog = [];
     this.isLoading = false;
     this.communityCards = [];
-    this.handCards = null;
+    this.privateCards = null;
     this.burnedCards = 0;
   }
 

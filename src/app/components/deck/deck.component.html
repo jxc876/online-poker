@@ -23,8 +23,8 @@
 
     <h1>Community Cards</h1>
 
-    <div class="visible-cards">
-      <img class="card" *ngFor="let card of communityCards" src="{{card.image}}" alt="Public Card">
+    <div class="community-card-container">
+      <img *ngFor="let card of communityCards" class="card card-front"  src="{{card.image}}" alt="Public Card">
     </div>
 
     <div class="burned-cards-container">
@@ -33,13 +33,12 @@
     </div>
   </div>
 
-  <div *ngIf="handCards">
+  <div *ngIf="privateCards">
 
     <h1>Your Cards</h1>
 
-    <div class="card-container">
-      <img src="{{handCards.cards[0].image}}" alt="Card One">
-      <img src="{{handCards.cards[1].image}}" alt="Card Two">
+    <div class="private-card-container">
+      <img *ngFor="let card of privateCards?.cards" class="card card-front" src="{{card.images.png}}" alt="Your Card">
     </div>
   </div>
 
