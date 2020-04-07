@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {DeckModule} from './components/deck/deck.module';
 import {ChipModule} from './components/chips/chip.module';
+import {PokerTableModule} from './components/poker-table/poker-table.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {ChipModule} from './components/chips/chip.module';
     BrowserModule,
     BrowserAnimationsModule,
     DeckModule,
-    ChipModule
+    ChipModule,
+    PokerTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
