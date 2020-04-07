@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CardApiService } from '../../services/CardApi.service';
 import {CardDrawResponse, DeckResponse, PlayingCard} from '../../models/card.model';
 
+interface PlayerInfo {
+  name: string;
+  playerNumber: number;
+  color: string;
+  bankValue: number;
+  stakeValue: number;
+  isPlaying?: boolean;
+}
 
 @Component({
   selector: 'app-poker-table',
@@ -18,11 +26,73 @@ export class PokerTableComponent implements OnInit {
   isLoading: boolean;
   historyLog: string[];
 
+  players: PlayerInfo[] = [];
+
   constructor(private readonly cardApi: CardApiService) {}
 
   ngOnInit(): void {
     this.newDeck();
     this.historyLog.push('New Game Started');
+
+    this.players = [
+      {
+        name: 'Player 1',
+        playerNumber: 1,
+        color: 'cyan',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 2',
+        playerNumber: 2,
+        color: 'gold',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 3',
+        playerNumber: 3,
+        color: 'lightcoral',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 4',
+        playerNumber: 4,
+        color: 'rgb(68, 68, 68)',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 5',
+        playerNumber: 5,
+        color: 'dodgerblue',
+        bankValue: 80,
+        stakeValue: 20,
+        isPlaying: true
+      },
+      {
+        name: 'Player 6',
+        playerNumber: 6,
+        color: 'goldenrod',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 7',
+        playerNumber: 7,
+        color: 'crimson',
+        bankValue: 80,
+        stakeValue: 20
+      },
+      {
+        name: 'Player 8',
+        playerNumber: 8,
+        color: 'forestgreen',
+        bankValue: 80,
+        stakeValue: 20
+      }
+     ];
   }
 
   // Not Used could be deleted
