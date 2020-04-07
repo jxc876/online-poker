@@ -8,7 +8,6 @@
 <button mat-flat-button (click)="shuffle()">Reset</button>
 
 <div *ngIf="deck">
-  <h1>Deck Information</h1>
   <ul>
     <li>Deck ID: {{deckId}}</li>
     <li>Cards Remaining: <strong>{{deck.remaining}}</strong></li>
@@ -16,15 +15,7 @@
   </ul>
 </div>
 
-<div *ngIf="privateCards">
-
-  <h1>Your Cards</h1>
-
-  <div class="private-card-container">
-    <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
-  </div>
-</div>
-
+<!-- Poker Table -->
 <div class="table-container">
 
   <div class="table">
@@ -245,6 +236,15 @@
 
 
     </div>
+  </div>
+</div>
+
+<div *ngIf="privateCards">
+
+  <h1>Your Cards</h1>
+
+  <div class="private-card-container">
+    <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
   </div>
 </div>
 
