@@ -18,8 +18,8 @@
     font-weight:bold;
     font-size:18px;
     color:#96e296;
-    &:after{
-      content:"$";
+    &:before{
+      content:"$ ";
     }
   }
   .v-10{
@@ -53,8 +53,8 @@
     font-weight:bold;
     font-size:18px;
     color:#96e296;
-    &:after{
-      content:"$";
+    &:before{
+      content:"$ ";
     }
   }
   [class^="token-"]{
