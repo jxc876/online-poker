@@ -2,15 +2,20 @@
 
   <div *ngFor="let player of players"
        class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isActive }">
-    <div class="bank">
+
+    <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
+    <div class="name">{{player.name}}</div>
+
+    <!-- Player Bank -->
+    <div class="bank" *ngIf="player.bankValue > 0">
       <div class="bank-value">{{player.bankValue}}</div>
       <div class="tokens v-10"></div>
       <div class="tokens v-5"></div>
       <div class="tokens v-1"></div>
     </div>
-    <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
-    <div class="name">{{player.name}}</div>
-    <div class="stake">
+
+    <!-- Player Stake -->
+    <div class="stake" *ngIf="player.stakeValue > 0">
       <div class="stake-value">
         {{player.stakeValue}}
       </div>
@@ -19,9 +24,9 @@
         <div class="tokens v-10" style="top: 3px;"></div>
       </div>
       <div class="token-5"></div>
-      <div class="token-1">
-      </div>
+      <div class="token-1"></div>
     </div>
+
   </div>
 
 </div>
