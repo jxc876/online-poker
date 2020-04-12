@@ -2,82 +2,87 @@
   <mat-progress-bar *ngIf="isLoading"  mode="indeterminate"></mat-progress-bar>
 </div>
 
-<button mat-flat-button (click)="drawCards()">Draw Cards</button>
-<button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
-<button mat-flat-button (click)="burnCard()">Burn Card</button>
-<button mat-flat-button (click)="shuffle()">Reset</button>
+<div *ngIf="game">
 
-<div *ngIf="deck">
+  <div class="actions">
+    <button mat-flat-button (click)="drawCards()">Draw Cards</button>
+    <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
+    <button mat-flat-button (click)="burnCard()">Burn Card</button>
+    <button mat-flat-button (click)="shuffleDeck()">Reset</button>
+  </div>
+
+
   <ul>
-    <li>Deck ID: {{deckId}}</li>
-    <li>Cards Remaining: <strong>{{deck.remaining}}</strong></li>
-    <li>Burned Cards: {{burnedCards}}</li>
+    <li>Deck ID: {{game.deckId}}</li>
+    <li>Cards Remaining: <strong>{{game.cardsRemaining}}</strong></li>
+    <li>Burned Cards: {{game.burnedCards}}</li>
   </ul>
-</div>
 
-<!-- Poker Table -->
-<div class="table-container">
+  <!-- Poker Table -->
+  <div class="table-container">
 
-  <div class="table">
+    <div class="table">
 
-    <div class="card-place">
+      <div class="card-place">
 
-      <div *ngFor="let card of communityCards" class="card figures-{{card.suit}}">
-        <h1>{{card.value}}</h1>
-        <div class="figures {{card.suit}}"></div>
-        <h1>{{card.value}}</h1>
+        <div *ngFor="let card of game.communityCards" class="card figures-{{card.suit}}">
+          <h1>{{card.value}}</h1>
+          <div class="figures {{card.suit}}"></div>
+          <h1>{{card.value}}</h1>
+        </div>
+
       </div>
 
-    </div>
 
+      <div class="players">
 
-    <div class="players">
-
-      <div *ngFor="let player of players"
-           class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isPlaying }">
-        <div class="bank">
-          <div class="bank-value">{{player.bankValue}}</div>
-          <div class="tokens v-10"></div>
-          <div class="tokens v-5"></div>
-          <div class="tokens v-1"></div>
+        <div *ngFor="let player of players"
+             class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isPlaying }">
+          <div class="bank">
+            <div class="bank-value">{{player.bankValue}}</div>
+            <div class="tokens v-10"></div>
+            <div class="tokens v-5"></div>
+            <div class="tokens v-1"></div>
+          </div>
+          <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
+          <div class="name">{{player.name}}</div>
+          <div class="stake">
+            <div class="stake-value">
+              {{player.stakeValue}}
+            </div>
+            <div class="token-10">
+              <div class="tokens v-10" style="top: -2px;"></div>
+              <div class="tokens v-10" style="top: 3px;"></div>
+            </div>
+            <div class="token-5"></div>
+            <div class="token-1">
+            </div>
+          </div>
         </div>
-        <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
-        <div class="name">{{player.name}}</div>
-        <div class="stake">
-          <div class="stake-value">
-            {{player.stakeValue}}
-          </div>
-          <div class="token-10">
-            <div class="tokens v-10" style="top: -2px;"></div>
-            <div class="tokens v-10" style="top: 3px;"></div>
-          </div>
-          <div class="token-5"></div>
-          <div class="token-1">
-          </div>
-        </div>
+
       </div>
-
     </div>
   </div>
-</div>
 
-<div *ngIf="privateCards">
+  <div *ngIf="privateCards">
 
-  <h1>Your Cards</h1>
+    <h1>Your Cards</h1>
 
-  <div class="private-card-container">
-    <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
+    <div class="private-card-container">
+      <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
+    </div>
   </div>
+
+  <p>
+    source: <a href="https://codepen.io/Rovak/pen/ExYeQar">https://codepen.io/Rovak/pen/ExYeQar</a>
+  </p>
+
+  <div class="history-container">
+    <h1>Game History</h1>
+    <ul>
+      <li *ngFor="let history of game.history">{{history}}</li>
+    </ul>
+  </div>
+
+
 </div>
-
-<p>
-  source: <a href="https://codepen.io/Rovak/pen/ExYeQar">https://codepen.io/Rovak/pen/ExYeQar</a>
-</p>
-
-<div class="history-container">
-  <h1>Game History</h1>
-  <ul>
-    <li *ngFor="let history of historyLog">{{history}}</li>
-  </ul>
-</div>
-
