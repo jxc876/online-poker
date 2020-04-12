@@ -4,5 +4,5 @@ export interface PlayerInfo {
   color: string;
   bankValue: number;
   stakeValue: number;
-  isPlaying?: boolean;
+  isActive?: boolean;
 }
