@@ -2,24 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CardApiService } from '../../services/CardApi.service';
 import {CardDrawResponse, DeckResponse, PlayingCard} from '../../models/card.model';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
-
-interface Game {
-  deckId: string;
-  history: string[];
-  potValue: number;
-  cardsRemaining: number;
-  burnedCards: number;
-  communityCards: PlayingCard[];
-}
-
-interface PlayerInfo {
-  name: string;
-  playerNumber: number;
-  color: string;
-  bankValue: number;
-  stakeValue: number;
-  isPlaying?: boolean;
-}
+import {Game} from '../../models/game.model';
+import {PlayerInfo} from '../../models/player.model';
 
 @Component({
   selector: 'app-poker-table',

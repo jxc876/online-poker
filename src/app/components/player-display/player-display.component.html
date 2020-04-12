@@ -1,0 +1,27 @@
+<div class="players">
+
+  <div *ngFor="let player of players"
+       class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isPlaying }">
+    <div class="bank">
+      <div class="bank-value">{{player.bankValue}}</div>
+      <div class="tokens v-10"></div>
+      <div class="tokens v-5"></div>
+      <div class="tokens v-1"></div>
+    </div>
+    <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
+    <div class="name">{{player.name}}</div>
+    <div class="stake">
+      <div class="stake-value">
+        {{player.stakeValue}}
+      </div>
+      <div class="token-10">
+        <div class="tokens v-10" style="top: -2px;"></div>
+        <div class="tokens v-10" style="top: 3px;"></div>
+      </div>
+      <div class="token-5"></div>
+      <div class="token-1">
+      </div>
+    </div>
+  </div>
+
+</div>
