@@ -77,12 +77,6 @@
     source: <a href="https://codepen.io/Rovak/pen/ExYeQar">https://codepen.io/Rovak/pen/ExYeQar</a>
   </p>
 
-  <div class="history-container">
-    <h1>Game History</h1>
-    <ul>
-      <li *ngFor="let history of game.history">{{history}}</li>
-    </ul>
-  </div>
-
+  <app-game-history [history]="game.history"></app-game-history>
 
 </div>
