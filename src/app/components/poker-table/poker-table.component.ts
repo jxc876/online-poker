@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardApiService } from '../../services/CardApi.service';
 import {CardDrawResponse, DeckResponse, PlayingCard} from '../../models/card.model';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 
 interface Game {
   deckId: string;
@@ -32,10 +32,9 @@ export class PokerTableComponent implements OnInit {
   privateCards: CardDrawResponse;
   isLoading: boolean;
 
+  playersCollection: AngularFirestoreCollection<PlayerInfo>;
   gameDoc: AngularFirestoreDocument<Game>;
-  // game: Observable<Game>;
   game: Game;
-
   players: PlayerInfo[] = [];
 
   constructor(
@@ -46,65 +45,7 @@ export class PokerTableComponent implements OnInit {
     this.getGameFromFirebase();
     // this.reset();
     // this.refreshDeckInfo();
-    this.players = [
-      {
-        name: 'Player 1',
-        playerNumber: 1,
-        color: 'cyan',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 2',
-        playerNumber: 2,
-        color: 'gold',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 3',
-        playerNumber: 3,
-        color: 'lightcoral',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 4',
-        playerNumber: 4,
-        color: 'rgb(68, 68, 68)',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 5',
-        playerNumber: 5,
-        color: 'dodgerblue',
-        bankValue: 80,
-        stakeValue: 20,
-        isPlaying: true
-      },
-      {
-        name: 'Player 6',
-        playerNumber: 6,
-        color: 'goldenrod',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 7',
-        playerNumber: 7,
-        color: 'crimson',
-        bankValue: 80,
-        stakeValue: 20
-      },
-      {
-        name: 'Player 8',
-        playerNumber: 8,
-        color: 'forestgreen',
-        bankValue: 80,
-        stakeValue: 20
-      }
-     ];
+    this.getPlayersFromFirebase();
   }
 
   // Not Used could be deleted
@@ -173,6 +114,13 @@ export class PokerTableComponent implements OnInit {
     this.gameDoc = this.firestore.doc<Game>('games/a34OfdT5VgFJDP8rhEzY');
     this.gameDoc.valueChanges().subscribe((game) => {
       this.game = game;
+    });
+  }
+
+  private getPlayersFromFirebase(): void {
+    this.playersCollection = this.firestore.collection<PlayerInfo>('players');
+    this.playersCollection.valueChanges().subscribe((players) => {
+      this.players = players;
     });
   }
 
