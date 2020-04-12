@@ -31,7 +31,10 @@ export class PokerTableComponent implements OnInit {
   constructor(private readonly cardApi: CardApiService) {}
 
   ngOnInit(): void {
-    this.newDeck();
+    // this.newDeck();
+    this.deckId = '8bzkfhma3csp';
+    this.reset();
+    this.refreshDeckInfo();
     this.historyLog.push('New Game Started');
 
     this.players = [
@@ -147,6 +150,8 @@ export class PokerTableComponent implements OnInit {
       this.refreshDeckInfo();
     });
   }
+
+
 
   private refreshDeckInfo(): void {
     this.isLoading = true;

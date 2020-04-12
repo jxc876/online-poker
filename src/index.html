@@ -9,6 +9,34 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAICxg_Gz0_ip1M-30QNK_pftfNQg7z-pI",
+      authDomain: "online-poker-c86b2.firebaseapp.com",
+      databaseURL: "https://online-poker-c86b2.firebaseio.com",
+      projectId: "online-poker-c86b2",
+      storageBucket: "online-poker-c86b2.appspot.com",
+      messagingSenderId: "291010386105",
+      appId: "1:291010386105:web:2b119b50867f1a6228a368",
+      measurementId: "G-DNM7LK3R6Y"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+  </script>
+
 </head>
 <body>
   <app-root></app-root>
