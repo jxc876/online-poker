@@ -4,6 +4,8 @@ import {CardDrawResponse, DeckResponse, PlayingCard} from '../../models/card.mod
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Game} from '../../models/game.model';
 import {PlayerInfo} from '../../models/player.model';
+import {AngularFireAuth} from '@angular/fire/auth';
+import UserCredential = firebase.auth.UserCredential;
 
 @Component({
   selector: 'app-poker-table',
@@ -20,16 +22,22 @@ export class PokerTableComponent implements OnInit {
   gameDoc: AngularFirestoreDocument<Game>;
   game: Game;
   players: PlayerInfo[] = [];
+  uid: string;
 
   constructor(
+    public auth: AngularFireAuth,
     private readonly firestore: AngularFirestore,
     private readonly cardApi: CardApiService) {}
 
   ngOnInit(): void {
-    this.getGameFromFirebase();
-    // this.reset();
-    // this.refreshDeckInfo();
-    this.getPlayersFromFirebase();
+    this.auth.auth.signInAnonymously().then((credentials: UserCredential) => {
+      // console.log(credentials.user.uid);
+      this.uid = credentials.user.uid;
+      this.getGameFromFirebase();
+      // this.reset();
+      // this.refreshDeckInfo();
+      this.getPlayersFromFirebase();
+    });
   }
 
   // Not Used could be deleted
@@ -38,7 +46,7 @@ export class PokerTableComponent implements OnInit {
     this.cardApi.createNewDeck().subscribe( (response: DeckResponse) => {
       this.game.deckId = response.deck_id;
       this.deck = response;
-      this.updateFirebaseState();
+      this.updateFirebaseGameState();
     });
   }
 
@@ -49,7 +57,7 @@ export class PokerTableComponent implements OnInit {
       this.isLoading = false;
       this.privateCards = drawCardResponse;
       this.game.cardsRemaining = drawCardResponse.remaining;
-      this.updateFirebaseState();
+      this.updateFirebaseGameState();
     }));
   }
 
@@ -60,7 +68,7 @@ export class PokerTableComponent implements OnInit {
       this.isLoading = false;
       this.game.burnedCards++;
       this.game.cardsRemaining = drawCardResponse.remaining;
-      this.updateFirebaseState();
+      this.updateFirebaseGameState();
     });
   }
 
@@ -78,7 +86,7 @@ export class PokerTableComponent implements OnInit {
       this.game.history.push(`Dealt Community Card: ${newCard.value} of ${newCard.suit}`);
       this.game.communityCards.push(newCard);
       this.game.cardsRemaining = drawCardResponse.remaining;
-      this.updateFirebaseState();
+      this.updateFirebaseGameState();
     }));
   }
 
@@ -90,7 +98,7 @@ export class PokerTableComponent implements OnInit {
       this.game.cardsRemaining = drawCardResponse.remaining;
       this.game.burnedCards = 0;
       this.game.communityCards = [];
-      this.updateFirebaseState();
+      this.updateFirebaseGameState();
     });
   }
 
@@ -108,7 +116,7 @@ export class PokerTableComponent implements OnInit {
     });
   }
 
-  private updateFirebaseState(): void {
+  private updateFirebaseGameState(): void {
     this.gameDoc.update({
       deckId: this.game.deckId,
       cardsRemaining: this.game.cardsRemaining,

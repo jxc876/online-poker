@@ -10,6 +10,7 @@ import {PokerTableModule} from './components/poker-table/poker-table.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AngularFirestoreModule,
     DeckModule,
     ChipModule,

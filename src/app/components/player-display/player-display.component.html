@@ -1,30 +1,45 @@
 <div class="players">
 
-  <div *ngFor="let player of players"
-       class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isActive }">
 
-    <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
-    <div class="name">{{player.name}}</div>
+  <div *ngFor="let player of players">
+    <div class="player player-{{player.playerNumber}}" [ngClass]="{ 'playing': player.isActive }">
 
-    <!-- Player Bank -->
-    <div class="bank" *ngIf="player.bankValue > 0">
-      <div class="bank-value">{{player.bankValue}}</div>
-      <div class="tokens v-10"></div>
-      <div class="tokens v-5"></div>
-      <div class="tokens v-1"></div>
-    </div>
+      <div class="avatar" [ngStyle]="{ 'background-color': player.color}"></div>
+      <div class="name">{{player.name}}</div>
 
-    <!-- Player Stake -->
-    <div class="stake" *ngIf="player.stakeValue > 0">
-      <div class="stake-value">
-        {{player.stakeValue}}
+      <!-- Player Bank -->
+      <div class="bank" *ngIf="player.bankValue > 0">
+        <div class="bank-value">{{player.bankValue}}</div>
+        <div class="tokens v-10"></div>
+        <div class="tokens v-5"></div>
+        <div class="tokens v-1"></div>
       </div>
-      <div class="token-10">
-        <div class="tokens v-10" style="top: -2px;"></div>
-        <div class="tokens v-10" style="top: 3px;"></div>
+
+      <!-- Player Stake -->
+      <div class="stake" *ngIf="player.stakeValue > 0">
+        <div class="stake-value">
+          {{player.stakeValue}}
+        </div>
+<!--        <div class="token-10">-->
+<!--          <div class="tokens v-10" style="top: -2px;"></div>-->
+<!--          <div class="tokens v-10" style="top: 3px;"></div>-->
+<!--        </div>-->
+<!--        <div class="token-5"></div>-->
+<!--        <div class="token-1"></div>-->
       </div>
-      <div class="token-5"></div>
-      <div class="token-1"></div>
+
+      <div style="min-height: 70px;">
+        <ng-container  *ngIf="player.hasCards">
+          <div class="card figures-CLUBS" >
+            <h1>4</h1><div class="figures CLUBS"></div>
+          </div>
+          <div class="card figures-CLUBS">
+            <h1>5</h1><div class="figures HEARTS"></div>
+          </div>
+        </ng-container>
+      </div>
+
+
     </div>
 
   </div>

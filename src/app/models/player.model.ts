@@ -5,4 +5,5 @@ export interface PlayerInfo {
   bankValue: number;
   stakeValue: number;
   isActive?: boolean;
+  hasCards?: boolean;
 }
