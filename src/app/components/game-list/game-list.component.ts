@@ -26,7 +26,7 @@ export class GameListComponent implements OnInit {
 
   getGameCollectionFromFirebase(): void {
     this.gameCollection = this.firestore.collection<Game>('games');
-    this.gameCollection.valueChanges().subscribe((games) => {
+    this.gameCollection.valueChanges({idField: 'id'}).subscribe((games) => {
       this.games = games;
       console.log('*** got games', games);
     });

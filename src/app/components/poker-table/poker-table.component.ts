@@ -6,6 +6,7 @@ import {Game} from '../../models/game.model';
 import {PlayerInfo} from '../../models/player.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import UserCredential = firebase.auth.UserCredential;
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-poker-table',
@@ -21,15 +22,22 @@ export class PokerTableComponent implements OnInit {
   playersCollection: AngularFirestoreCollection<PlayerInfo>;
   gameDoc: AngularFirestoreDocument<Game>;
   game: Game;
+  gameId: string;
+
   players: PlayerInfo[] = [];
   uid: string;
 
   constructor(
     public auth: AngularFireAuth,
     private readonly firestore: AngularFirestore,
-    private readonly cardApi: CardApiService) {}
+    private readonly cardApi: CardApiService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+
+    this.gameId = this.route.snapshot.paramMap.get('id');
+
     this.auth.auth.signInAnonymously().then((credentials: UserCredential) => {
       // console.log(credentials.user.uid);
       this.uid = credentials.user.uid;
@@ -103,14 +111,16 @@ export class PokerTableComponent implements OnInit {
   }
 
   private getGameFromFirebase(): void {
-    this.gameDoc = this.firestore.doc<Game>('games/a34OfdT5VgFJDP8rhEzY');
+    this.gameDoc = this.firestore.doc<Game>(`games/${this.gameId}`);
     this.gameDoc.valueChanges().subscribe((game) => {
       this.game = game;
     });
   }
 
   private getPlayersFromFirebase(): void {
-    this.playersCollection = this.firestore.collection<PlayerInfo>('players');
+    this.playersCollection = this.firestore.collection<PlayerInfo>('players', ref => {
+      return ref.where('gameId', '==', this.gameId);
+    });
     this.playersCollection.valueChanges().subscribe((players) => {
       this.players = players;
     });
