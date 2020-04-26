@@ -118,9 +118,7 @@ export class PokerTableComponent implements OnInit {
   }
 
   private getPlayersFromFirebase(): void {
-    this.playersCollection = this.firestore.collection<PlayerInfo>('players', ref => {
-      return ref.where('gameId', '==', this.gameId);
-    });
+    this.playersCollection = this.gameDoc.collection<PlayerInfo>('players');
     this.playersCollection.valueChanges().subscribe((players) => {
       this.players = players;
     });
