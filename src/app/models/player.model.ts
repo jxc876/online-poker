@@ -6,4 +6,5 @@ export interface PlayerInfo {
   stakeValue: number;
   isActive?: boolean;
   hasCards?: boolean;
+  uid?: string;
 }
