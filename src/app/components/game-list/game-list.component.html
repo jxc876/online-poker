@@ -1,0 +1,43 @@
+<h2>Game List</h2>
+
+<table mat-table [dataSource]="games" class="">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let game">
+      <a routerLink="/game/{{game.deckId}}">{{game.deckId}}</a>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="desc">
+    <th mat-header-cell *matHeaderCellDef> Desc </th>
+    <td mat-cell *matCellDef="let game"> {{game.description}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'desc']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'desc'];"></tr>
+</table>
+
+<h2>Create Game</h2>
+
+<form class="create-game-form">
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <input matInput
+           required
+           minlength="4"
+           placeholder="Describe Your Poker Game"
+           #description="ngModel"
+           [(ngModel)]="newGameDesc" name="description">
+  </mat-form-field>
+
+  <br/>
+  <button mat-raised-button
+          color="primary"
+          [disabled]="description.invalid"
+          (click)="createNewGame()">Create Game
+  </button>
+</form>

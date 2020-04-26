@@ -11,6 +11,8 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AppRoutingModule} from './app.routing.module';
+import {GameListModule} from './components/game-list/game-list.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     AngularFirestoreModule,
     DeckModule,
     ChipModule,
-    PokerTableModule
+    GameListModule,
+    PokerTableModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
