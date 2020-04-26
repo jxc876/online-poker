@@ -136,13 +136,26 @@ export class PokerTableComponent implements OnInit {
     });
   }
 
-  // private refreshDeckInfo(): void {
-  //   this.isLoading = true;
-  //   this.cardApi.getDeckInfo(this.deckId).subscribe((deckInfoResponse => {
-  //     this.isLoading = false;
-  //     this.deck = deckInfoResponse;
-  //   }));
-  // }
+  joinGame(): void {
+    const numCurrentPlayers = this.players.length;
+
+    if (numCurrentPlayers >= 8) {
+      return;
+    }
+
+    const newPlayer: PlayerInfo = {
+      hasCards: false,
+      stakeValue: 0,
+      name: `Player ${numCurrentPlayers + 1}`,
+      playerNumber: numCurrentPlayers + 1,
+      isActive: false,
+      color: '',
+      bankValue: 0,
+      uid: ''
+    };
+
+    this.playersCollection.add(newPlayer).then(p => console.log('new player was added to the game'));
+  }
 
   private reset(): void {
     // this.historyLog = [];
