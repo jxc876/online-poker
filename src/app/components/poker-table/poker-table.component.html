@@ -5,6 +5,7 @@
 <div *ngIf="game">
 
   <div class="actions">
+    <button mat-flat-button color="accent" routerLink="/game-list">Game List</button>
     <button [disabled]="!canJoinGame()" mat-flat-button (click)="joinGame()">Join Game</button>
     <button [disabled]="!isAlreadyInGame()" mat-flat-button color="warn" (click)="leaveGame()">Leave Game</button>
   </div>

@@ -120,8 +120,8 @@ export class PokerTableComponent implements OnInit {
   private getPlayersFromFirebase(): void {
     this.playersCollection = this.gameDoc.collection<PlayerInfo>('players');
     this.playersCollection.valueChanges({idField: 'id'}).subscribe((players) => {
-      this.players = players;
       console.log(`Got ${players.length} from Firebase`);
+      this.players = players;
     });
   }
 
@@ -139,6 +139,7 @@ export class PokerTableComponent implements OnInit {
 
   canJoinGame(): boolean {
     if (!this.isSeatAvailable()) {
+      console.log('cannot join game');
       return false;
     }
 
@@ -146,7 +147,7 @@ export class PokerTableComponent implements OnInit {
   }
 
   isSeatAvailable(): boolean {
-    return this.players.length <= 8;
+    return this.players.length < 8;
   }
 
   isAlreadyInGame(): boolean {
