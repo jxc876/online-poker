@@ -19,7 +19,6 @@ export class PlayerDisplayComponent implements OnInit {
   ngOnInit() {
 
     this.auth.user.subscribe((user) => {
-      console.log('*** PlayerInfo: user => ', user);
       this.uid = user.uid;
     });
   }

@@ -119,8 +119,9 @@ export class PokerTableComponent implements OnInit {
 
   private getPlayersFromFirebase(): void {
     this.playersCollection = this.gameDoc.collection<PlayerInfo>('players');
-    this.playersCollection.valueChanges().subscribe((players) => {
+    this.playersCollection.valueChanges({idField: 'id'}).subscribe((players) => {
       this.players = players;
+      console.log(`Got ${players.length} from Firebase`);
     });
   }
 
@@ -167,6 +168,7 @@ export class PokerTableComponent implements OnInit {
       return;
     }
 
+    // TODO: fix bug where you join & leave game
     const newPlayer: PlayerInfo = {
       hasCards: false,
       stakeValue: 0,
@@ -179,6 +181,14 @@ export class PokerTableComponent implements OnInit {
     };
 
     this.playersCollection.add(newPlayer).then(p => console.log('new player was added to the game'));
+  }
+
+  private leaveGame(): void {
+    const currentPlayer: PlayerInfo = this.players.find(p => this.uid === p.uid);
+    const currentPlayerId: string =  currentPlayer['id'];
+    this.playersCollection.doc(`${currentPlayerId}`).delete().then(() => {
+      console.log(`player ${currentPlayerId} was removed from game`);
+    });
   }
 
   private reset(): void {
