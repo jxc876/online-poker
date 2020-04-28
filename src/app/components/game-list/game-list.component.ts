@@ -11,9 +11,10 @@ import {DeckResponse} from '../../models/card.model';
 })
 export class GameListComponent implements OnInit {
 
+  public isLoading = true;
+  public games: Game[] = [];
+  public newGameDesc = '';
   private gameCollection: AngularFirestoreCollection<Game>;
-  games: Game[] = [];
-  newGameDesc = '';
 
   constructor(
     private readonly firestore: AngularFirestore,
@@ -27,8 +28,8 @@ export class GameListComponent implements OnInit {
   getGameCollectionFromFirebase(): void {
     this.gameCollection = this.firestore.collection<Game>('games');
     this.gameCollection.valueChanges({idField: 'id'}).subscribe((games) => {
+      this.isLoading = false;
       this.games = games;
-      console.log('*** got games', games);
     });
   }
 

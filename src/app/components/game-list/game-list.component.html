@@ -1,5 +1,9 @@
 <h2>Game List</h2>
 
+<div class="loading-container">
+  <mat-progress-bar *ngIf="isLoading"  mode="indeterminate"></mat-progress-bar>
+</div>
+
 <table mat-table [dataSource]="games" class="">
 
   <!-- Position Column -->
