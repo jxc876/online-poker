@@ -5,7 +5,7 @@
 <div *ngIf="game">
 
   <div class="actions">
-    <button [disabled]="players?.length >= 8" mat-flat-button (click)="joinGame()">Join Game</button>
+    <button [disabled]="!canJoinGame()" mat-flat-button (click)="joinGame()">Join Game</button>
     <button mat-flat-button (click)="drawCards()">Draw Cards</button>
     <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
     <button mat-flat-button (click)="burnCard()">Burn Card</button>

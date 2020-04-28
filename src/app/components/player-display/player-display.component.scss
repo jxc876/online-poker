@@ -122,6 +122,12 @@
       }
     }
 
+    &.my-avatar {
+      .avatar {
+        border: 3px solid blue;
+      }
+    }
+
     .name{
       font-family:"Houschka Rounded";
       text-align:center;

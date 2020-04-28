@@ -28,10 +28,10 @@ export class PokerTableComponent implements OnInit {
   uid: string;
 
   constructor(
-    public auth: AngularFireAuth,
+    private readonly auth: AngularFireAuth,
     private readonly firestore: AngularFirestore,
     private readonly cardApi: CardApiService,
-    private route: ActivatedRoute
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +136,30 @@ export class PokerTableComponent implements OnInit {
     });
   }
 
+  canJoinGame(): boolean {
+    if (!this.isSeatAvailable()) {
+      return false;
+    }
+
+    return !this.isAlreadyInGame();
+  }
+
+  isSeatAvailable(): boolean {
+    return this.players.length <= 8;
+  }
+
+  isAlreadyInGame(): boolean {
+    let isAlreadyInGame = false;
+
+    this.players.forEach((p) => {
+      if (this.uid === p.uid) {
+        isAlreadyInGame = true;
+      }
+    });
+
+    return isAlreadyInGame;
+  }
+
   joinGame(): void {
     const numCurrentPlayers = this.players.length;
 
@@ -151,7 +175,7 @@ export class PokerTableComponent implements OnInit {
       isActive: false,
       color: '',
       bankValue: 0,
-      uid: ''
+      uid: this.uid
     };
 
     this.playersCollection.add(newPlayer).then(p => console.log('new player was added to the game'));
