@@ -16,18 +16,17 @@ import {PlayerOptions} from '../join-game/join-game.component';
 })
 export class PokerTableComponent implements OnInit {
 
-  deck: DeckResponse;
-  privateCards: CardDrawResponse;
   isLoading: boolean;
-  showPlayerInfo = false;
+  uid: string;
 
   playersCollection: AngularFirestoreCollection<PlayerInfo>;
   gameDoc: AngularFirestoreDocument<Game>;
   game: Game;
   gameId: string;
 
+  showPlayerInfo = false;
   players: PlayerInfo[] = [];
-  uid: string;
+  privateCards: CardDrawResponse;
 
   constructor(
     private readonly auth: AngularFireAuth,
@@ -41,22 +40,11 @@ export class PokerTableComponent implements OnInit {
     this.gameId = this.route.snapshot.paramMap.get('id');
 
     this.auth.auth.signInAnonymously().then((credentials: UserCredential) => {
-      // console.log(credentials.user.uid);
       this.uid = credentials.user.uid;
       this.getGameFromFirebase();
       // this.reset();
       // this.refreshDeckInfo();
       this.getPlayersFromFirebase();
-    });
-  }
-
-  // Not Used could be deleted
-  newDeck(): void {
-    this.reset();
-    this.cardApi.createNewDeck().subscribe( (response: DeckResponse) => {
-      this.game.deckId = response.deck_id;
-      this.deck = response;
-      this.updateFirebaseGameState();
     });
   }
 
@@ -188,7 +176,7 @@ export class PokerTableComponent implements OnInit {
     this.showPlayerInfo = false;
   }
 
-  private leaveGame(): void {
+  leaveGame(): void {
     const currentPlayer: PlayerInfo = this.players.find(p => this.uid === p.uid);
     const currentPlayerId: string =  currentPlayer['id'];
     this.playersCollection.doc(`${currentPlayerId}`).delete().then(() => {
