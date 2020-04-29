@@ -6,9 +6,11 @@
 
   <div class="actions">
     <button mat-flat-button color="accent" routerLink="/game-list">Game List</button>
-    <button [disabled]="!canJoinGame()" mat-flat-button (click)="joinGame()">Join Game</button>
+    <button [disabled]="!canJoinGame()" mat-flat-button (click)="showPlayerInfo = true">Join Game</button>
     <button [disabled]="!isAlreadyInGame()" mat-flat-button color="warn" (click)="leaveGame()">Leave Game</button>
   </div>
+
+  <app-join-game *ngIf="showPlayerInfo" (joinGame)="joinGame($event)"></app-join-game>
 
   <div class="actions">
     <button mat-flat-button (click)="drawCards()">Draw Cards</button>

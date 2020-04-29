@@ -5,16 +5,18 @@ import {MatButtonModule, MatProgressBarModule} from '@angular/material';
 import {GameHistoryModule} from '../game-history/game-history.module';
 import {PlayerDisplayModule} from '../player-display/player-display.module';
 import {RouterModule} from '@angular/router';
+import {JoinGameModule} from '../join-game/join-game.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MatProgressBarModule,
-        MatButtonModule,
-        GameHistoryModule,
-        PlayerDisplayModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    GameHistoryModule,
+    PlayerDisplayModule,
+    RouterModule,
+    JoinGameModule
+  ],
   declarations: [
     PokerTableComponent
   ],

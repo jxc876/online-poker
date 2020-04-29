@@ -7,6 +7,7 @@ import {PlayerInfo} from '../../models/player.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import UserCredential = firebase.auth.UserCredential;
 import {ActivatedRoute} from '@angular/router';
+import {PlayerOptions} from '../join-game/join-game.component';
 
 @Component({
   selector: 'app-poker-table',
@@ -18,6 +19,7 @@ export class PokerTableComponent implements OnInit {
   deck: DeckResponse;
   privateCards: CardDrawResponse;
   isLoading: boolean;
+  showPlayerInfo = false;
 
   playersCollection: AngularFirestoreCollection<PlayerInfo>;
   gameDoc: AngularFirestoreDocument<Game>;
@@ -139,7 +141,6 @@ export class PokerTableComponent implements OnInit {
 
   canJoinGame(): boolean {
     if (!this.isSeatAvailable()) {
-      console.log('cannot join game');
       return false;
     }
 
@@ -162,7 +163,8 @@ export class PokerTableComponent implements OnInit {
     return isAlreadyInGame;
   }
 
-  joinGame(): void {
+  joinGame(playerOptions: PlayerOptions): void {
+
     const numCurrentPlayers = this.players.length;
 
     if (numCurrentPlayers >= 8) {
@@ -173,15 +175,17 @@ export class PokerTableComponent implements OnInit {
     const newPlayer: PlayerInfo = {
       hasCards: false,
       stakeValue: 0,
-      name: `Player ${numCurrentPlayers + 1}`,
+      name: playerOptions.name || `Player ${numCurrentPlayers + 1}`,
       playerNumber: numCurrentPlayers + 1,
       isActive: false,
-      color: '',
+      color: playerOptions.color || '',
       bankValue: 0,
       uid: this.uid
     };
 
     this.playersCollection.add(newPlayer).then(p => console.log('new player was added to the game'));
+
+    this.showPlayerInfo = false;
   }
 
   private leaveGame(): void {

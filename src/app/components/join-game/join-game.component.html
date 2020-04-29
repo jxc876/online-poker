@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <h2>Enter your Details</h2>
+
+  <form class="join-game-form">
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput
+             required
+             minlength="4"
+             placeholder="Enter you name"
+             [(ngModel)]="playerName" name="playerName">
+    </mat-form-field>
+
+    <br />
+
+    <span class="color-label">Avatar Color:</span>
+    <input [style.background]="color"
+           [cpPresetColors]="['#DAA520', '#228B22', '#00FFFF', '#f08080', '#fff500', '#ffd700', '#dc143c', 'rgb(68, 68, 68)']"
+           [(colorPicker)]="color"/>
+
+    <br/>
+    <button class="join-button" mat-raised-button (click)="emitEvent()">Join</button>
+  </form>
+
+</div>
