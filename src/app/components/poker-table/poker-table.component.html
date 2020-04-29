@@ -12,8 +12,12 @@
 
   <app-join-game *ngIf="showPlayerInfo" (joinGame)="joinGame($event)"></app-join-game>
 
-  <div class="actions" *ngIf="isAlreadyInGame()">
-    <button mat-flat-button (click)="drawCards()">Draw Cards</button>
+  <div *ngIf="isAlreadyInGame()">
+    <button mat-flat-button [disabled]="findPlayerByUid()?.hasCards" (click)="drawCards()">Draw Cards</button>
+    <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="discardCards()">Discard Cards</button>
+  </div>
+
+  <div *ngIf="isAlreadyInGame()">
     <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
     <button mat-flat-button (click)="burnCard()">Burn Card</button>
     <button mat-flat-button (click)="shuffleDeck()">Reset</button>

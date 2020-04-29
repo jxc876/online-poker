@@ -55,6 +55,10 @@ export class PokerTableComponent implements OnInit {
       this.isLoading = false;
       this.privateCards = drawCardResponse;
       this.game.cardsRemaining = drawCardResponse.remaining;
+      const p: PlayerInfo = this.findPlayerByUid();
+      const playerId = p['id'];
+      p.hasCards = true;
+      this.playersCollection.doc(`${playerId}`).update(p).then();
       this.updateFirebaseGameState();
     }));
   }
@@ -182,6 +186,18 @@ export class PokerTableComponent implements OnInit {
     this.playersCollection.doc(`${currentPlayerId}`).delete().then(() => {
       console.log(`player ${currentPlayerId} was removed from game`);
     });
+  }
+
+  discardCards(): void {
+    const p: PlayerInfo = this.findPlayerByUid();
+    const playerId = p['id'];
+    p.hasCards = false;
+    this.playersCollection.doc(`${playerId}`).update(p).then();
+    this.privateCards = null;
+  }
+
+  private findPlayerByUid(): PlayerInfo {
+    return this.players.find(p => this.uid === p.uid);
   }
 
   private reset(): void {
