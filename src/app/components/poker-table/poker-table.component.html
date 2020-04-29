@@ -32,8 +32,14 @@
 
     <div class="table">
 
-      <div class="card-place">
+      <div class="burned-cards-container" *ngIf="game?.burnedCards > 0">
+        <img class="card card-back burned-card"
+             src="assets/images/cardBackRed.jpg" alt="Burned Card">
+        <span>x {{game?.burnedCards}}</span>
+      </div>
 
+
+      <div class="card-place">
         <div *ngFor="let card of game.communityCards" class="card figures-{{card.suit}}">
           <h1>{{card.value}}</h1>
           <div class="figures {{card.suit}}"></div>
