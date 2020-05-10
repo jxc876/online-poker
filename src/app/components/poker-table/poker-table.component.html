@@ -15,12 +15,13 @@
   <div *ngIf="isAlreadyInGame()">
     <button mat-flat-button [disabled]="findPlayerByUid()?.hasCards" (click)="drawCards()">Draw Cards</button>
     <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="discardCards()">Discard Cards</button>
+    <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="revealCards()">Reveal Cards</button>
   </div>
 
   <div *ngIf="isAlreadyInGame()">
     <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
     <button mat-flat-button (click)="burnCard()">Burn Card</button>
-    <button mat-flat-button (click)="shuffleDeck()">Reset</button>
+    <button mat-flat-button (click)="shuffleDeck()">Shuffle Deck</button>
   </div>
 
   <!-- Poker Table -->
@@ -28,14 +29,17 @@
 
     <div class="table">
 
+      <!-- Burned Cards -->
       <div class="burned-cards-container" *ngIf="game?.burnedCards > 0">
         <img class="card card-back burned-card"
              src="assets/images/cardBackRed.jpg" alt="Burned Card">
-        <span>x {{game?.burnedCards}}</span>
+        <span>🔥 x {{game?.burnedCards}}</span>
       </div>
 
 
       <div class="card-place">
+
+        <!-- Community Cards -->
         <div *ngFor="let card of game.communityCards" class="card figures-{{card.suit}}">
           <h1>{{card.value}}</h1>
           <div class="figures {{card.suit}}"></div>
@@ -43,11 +47,20 @@
         </div>
 
       </div>
+
+
+      <!-- Deck Cards -->
+      <div class="deck-cards-container">
+        <img class="card card-back burned-card"
+             src="assets/images/cardBackRed.jpg" alt="Burned Card">
+        <span>X {{game?.cardsRemaining}}</span>
+      </div>
+
       <app-player-display [players]="players"></app-player-display>
     </div>
   </div>
 
-  <div *ngIf="privateCards">
+  <div *ngIf="privateCards && game.cardsRemaining < 52">
 
     <h1>Your Cards</h1>
 

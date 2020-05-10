@@ -1,3 +1,5 @@
+import {PlayingCard} from './card.model';
+
 export interface PlayerInfo {
   name: string;
   playerNumber: number;
@@ -7,4 +9,5 @@ export interface PlayerInfo {
   isActive?: boolean;
   hasCards?: boolean;
   uid?: string;
+  cards?: PlayingCard[];
 }

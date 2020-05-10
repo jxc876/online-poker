@@ -63,6 +63,27 @@ export class PokerTableComponent implements OnInit {
     }));
   }
 
+  discardCards(): void {
+    const p: PlayerInfo = this.findPlayerByUid();
+    const playerId = p['id'];
+    p.hasCards = false;
+    p.cards = [];
+    this.playersCollection.doc(`${playerId}`).update(p).then();
+    this.privateCards = null;
+  }
+
+  revealCards(): void {
+    const p: PlayerInfo = this.findPlayerByUid();
+    const playerId = p['id'];
+    if (this.privateCards) {
+      p.cards = this.privateCards.cards;
+      p.cards = [];
+      p.cards.push({ value: this.privateCards.cards[0].value, suit: this.privateCards.cards[0].suit });
+      p.cards.push({ value: this.privateCards.cards[1].value, suit: this.privateCards.cards[1].suit });
+      this.playersCollection.doc(`${playerId}`).update(p).then();
+    }
+  }
+
   burnCard(): void {
     this.isLoading = true;
     this.game.history.push('Burned Card');
@@ -94,9 +115,19 @@ export class PokerTableComponent implements OnInit {
 
   shuffleDeck(): void {
     this.reset();
+    this.isLoading = true;
     this.game.history = [];
     this.game.history.push('Shuffled Deck');
+
+    this.players.forEach((p: PlayerInfo) => {
+      const playerId = p['id'];
+      p.hasCards = false;
+      p.cards = [];
+      this.playersCollection.doc(`${playerId}`).update(p).then();
+    });
+
     this.cardApi.shuffleDeck(this.game.deckId).subscribe((drawCardResponse) => {
+      this.isLoading = false;
       this.game.cardsRemaining = drawCardResponse.remaining;
       this.game.burnedCards = 0;
       this.game.communityCards = [];
@@ -186,14 +217,6 @@ export class PokerTableComponent implements OnInit {
     this.playersCollection.doc(`${currentPlayerId}`).delete().then(() => {
       console.log(`player ${currentPlayerId} was removed from game`);
     });
-  }
-
-  discardCards(): void {
-    const p: PlayerInfo = this.findPlayerByUid();
-    const playerId = p['id'];
-    p.hasCards = false;
-    this.playersCollection.doc(`${playerId}`).update(p).then();
-    this.privateCards = null;
   }
 
   private findPlayerByUid(): PlayerInfo {

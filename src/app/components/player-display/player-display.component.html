@@ -30,18 +30,20 @@
       </div>
 
       <div style="min-height: 70px;">
-        <ng-container  *ngIf="player.hasCards">
+
+        <ng-container  *ngIf="player.hasCards && player?.cards?.length === 0">
           <img class="card card-back burned-card"
                src="assets/images/cardBackRed.jpg" alt="Burned Card">
           <img class="card card-back burned-card"
                src="assets/images/cardBackRed.jpg" alt="Burned Card">
-<!--          <div class="card figures-CLUBS" >-->
-<!--            <h1>4</h1><div class="figures CLUBS"></div>-->
-<!--          </div>-->
-<!--          <div class="card figures-CLUBS">-->
-<!--            <h1>5</h1><div class="figures HEARTS"></div>-->
-<!--          </div>-->
         </ng-container>
+
+        <ng-container *ngIf="player.cards">
+            <div *ngFor="let card of player.cards" class="card figures-{{card.suit}}" >
+              <h1>{{card.value}}</h1><div class="figures {{card.suit}}"></div>
+            </div>
+        </ng-container>
+
       </div>
 
 

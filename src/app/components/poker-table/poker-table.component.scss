@@ -131,6 +131,18 @@ button {
 
   span {
     display: block;
+    //padding-left: 15px;
+    color: #96e296;
+  }
+}
+
+.deck-cards-container {
+  position: absolute;
+  right: 25%;
+  top: 41%;
+
+  span {
+    display: block;
     padding-left: 15px;
     color: #96e296;
   }
