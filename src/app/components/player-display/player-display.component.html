@@ -39,8 +39,10 @@
         </ng-container>
 
         <ng-container *ngIf="player.cards">
-            <div *ngFor="let card of player.cards" class="card figures-{{card.suit}}" >
-              <h1>{{card.value}}</h1><div class="figures {{card.suit}}"></div>
+            <div *ngFor="let card of player.cards" class="card figures-{{card.suit}}">
+              <h1>{{card.value}}</h1>
+              <div class="figures {{card.suit}}"></div>
+              <h1>{{card.value}}</h1>
             </div>
         </ng-container>
 
