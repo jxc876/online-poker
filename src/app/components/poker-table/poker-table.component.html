@@ -13,12 +13,7 @@
   <app-join-game *ngIf="showPlayerInfo" (joinGame)="joinGame($event)"></app-join-game>
 
   <div *ngIf="isAlreadyInGame()">
-    <button mat-flat-button [disabled]="findPlayerByUid()?.hasCards" (click)="drawCards()">Draw Cards</button>
-    <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="discardCards()">Discard Cards</button>
-    <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="revealCards()">Reveal Cards</button>
-  </div>
-
-  <div *ngIf="isAlreadyInGame()">
+    <h3>Dealer Actions</h3>
     <button mat-flat-button (click)="dealCommunityCard()">Deal Community Card</button>
     <button mat-flat-button (click)="burnCard()">Burn Card</button>
     <button mat-flat-button (click)="shuffleDeck()">Shuffle Deck</button>
@@ -60,19 +55,25 @@
     </div>
   </div>
 
-  <div *ngIf="privateCards && game.cardsRemaining < 52">
-
+  <div>
     <h1>Your Cards</h1>
 
-    <div class="private-card-container">
+    <div *ngIf="isAlreadyInGame()">
+      <button mat-flat-button [disabled]="findPlayerByUid()?.hasCards" (click)="drawCards()">Draw Cards</button>
+      <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="discardCards()">Discard Cards</button>
+      <button mat-flat-button [disabled]="!findPlayerByUid()?.hasCards" (click)="revealCards()">Reveal Cards</button>
+    </div>
+
+    <div class="private-card-container" *ngIf="privateCards && game.cardsRemaining < 52">
       <img *ngFor="let card of privateCards?.cards" class="card-img card-front" src="{{card.images.png}}" alt="Your Card">
     </div>
   </div>
 
-  <p>
-    source: <a href="https://codepen.io/Rovak/pen/ExYeQar">https://codepen.io/Rovak/pen/ExYeQar</a>
-  </p>
-
   <app-game-history [history]="game.history"></app-game-history>
+
+  <h1>Credits</h1>
+  <p>
+    poker table css: <a href="https://codepen.io/Rovak/pen/ExYeQar">https://codepen.io/Rovak/pen/ExYeQar</a>
+  </p>
 
 </div>
